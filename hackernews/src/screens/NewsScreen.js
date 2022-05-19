@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 //import axios from "axios";
 import logo from "../assets/gif/y18.gif";
@@ -6,6 +7,7 @@ import "../css/news.css";
 
 function News() {
 	const [data, setData] = useState(null);
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
 		//fetchSubmissions();
@@ -101,9 +103,18 @@ function News() {
 											2 points{" "}
 										</span>{" "}
 										by
-										<a href="../">username</a>
+										<Link
+											to={{
+												pathname: "/user",
+												search: "?id=1",
+											}}
+										>
+											{" "}
+											username
+										</Link>
 										<span className="age" title="2022-03-23T23:36:00">
-											<a href="item/{{ submission.id }}">14 hours</a>
+											{" "}
+											<a href="item/{{ submission.id }}">14 hours </a>
 										</span>
 										|
 										<a
@@ -113,7 +124,7 @@ function News() {
 										>
 											unvote
 										</a>{" "}
-										|<a href="../">hide</a>|<a href="../">14 comments</a>
+										| <a href="../">hide</a> | <a href="../"> 14 comments</a>
 									</td>
 								</tr>
 								<tr className="spacer" style={{ height: 5 }}></tr>

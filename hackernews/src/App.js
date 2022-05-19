@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import News from "./screens/News";
+import News from "./screens/NewsScreen";
+import User from "./screens/UserScreen";
 
 function App() {
 	return (
@@ -7,6 +8,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<News />} />
 				<Route path="/news" element={<News />} />
+				<Route path="/user" element={<User />} />
 			</Routes>
 		</div>
 	);
