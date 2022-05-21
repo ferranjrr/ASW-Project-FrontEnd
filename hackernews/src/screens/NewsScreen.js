@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
-//import axios from "axios";
 import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
