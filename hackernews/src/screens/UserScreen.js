@@ -6,10 +6,7 @@ import "../css/news.css";
 import logo from "../assets/gif/y18.gif";
 import axios from "axios";
 
-const PersistenceCtrl = require("../db/persistence");
-
 function User() {
-	let persistCtrl = new PersistenceCtrl();
 	const [params, setParams] = useState(null);
 	const location = useLocation();
 	const [user, setUser] = useState(null);
@@ -21,7 +18,6 @@ function User() {
 		if (!singleValue) return;
 		setParams(singleValue);
 		if (isLoading) {
-			//const data = persistCtrl.getRequest("", "rguixaro");
 			axios
 				.get("https://aswprojectdjango.herokuapp.com/api/" + "rguixaro")
 				.then((response) => {
