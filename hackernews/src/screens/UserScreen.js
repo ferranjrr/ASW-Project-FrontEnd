@@ -6,7 +6,6 @@ import logo from "../assets/gif/y18.gif";
 import axios from "axios";
 
 function User() {
-	const [params, setParams] = useState(null);
 	const location = useLocation();
 	const [user, setUser] = useState(null);
 	const [isLoading, setLoading] = useState(true);
@@ -15,10 +14,9 @@ function User() {
 		const queryParams = new URLSearchParams(location.search);
 		const singleValue = queryParams.get("id");
 		if (!singleValue) return;
-		setParams(singleValue);
 		if (isLoading) {
 			axios
-				.get("https://aswprojectdjango.herokuapp.com/api/" + "rguixaro")
+				.get("https://aswprojectdjango.herokuapp.com/api/" + singleValue)
 				.then((response) => {
 					setUser(response.data);
 					setLoading(false);
@@ -27,7 +25,6 @@ function User() {
 					console.log(err);
 				});
 		}
-		console.log(user);
 	}, []);
 
 	if (isLoading) {
@@ -123,12 +120,12 @@ function User() {
 										<td valign="top">user:</td>
 										<td timestamp="1649170369">
 											<a href="../" class="hnuser"></a>
-											<font color="#3c963c">fake</font>
+											<font color="#3c963c">{user.username}</font>
 										</td>
 									</tr>
 									<tr>
 										<td valign="top">created:</td>
-										<td>{user.created_at_date}</td>
+										<td>{user.age}</td>
 									</tr>
 									<tr>
 										<td valign="top">karma:</td>
@@ -151,6 +148,7 @@ function User() {
 									</tr>
 									<tr>
 										<td valign="top">email:</td>
+										<td>{user.email}</td>
 									</tr>
 									<tr>
 										<td valign="top">API-KEY:</td>
