@@ -1,0 +1,65 @@
+TOKEN A UTILITZAR: 3dc9e4d05afb7904e557ccfc80148ae3ff18ea56
+
+POST api/submission/<submission_id>/upvote
+
+- token
+
+DELETE api/submission/<submission_id>/unvote
+
+- token
+
+GET api/submission/<submission_id>/comments
+
+POST api/submission/<submission_id>/comment
+
+- token
+- text
+
+GET api/submission/<submission_id>
+
+POST api/comment/<comment_id>/upvote
+
+- token
+
+DELETE api/comment/<comment_id>/unvote
+
+- token
+
+POST api/comment/<comment_id>/reply
+
+- token
+- text
+
+POST api/submit
+
+- token
+- title
+- url
+- text
+
+GET api/news
+
+GET api/newest
+
+GET api/ask
+
+GET api/news/<date>
+
+GET api/<username>/comments
+
+GET api/<username>/submissions
+
+GET api/upvotedSubmissions
+
+- token
+
+GET api/upvotedComments
+
+- token
+
+PUT api/editProfile
+
+- token
+- about
+
+GET api/<username>

@@ -1,17 +1,101 @@
 import React, { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import axios from "axios";
 
-//import axios from "axios";
 import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
 function News() {
-	const [data, setData] = useState(null);
+	const [data, setData] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
+	const [isLoading, setLoading] = useState(true);
 
 	useEffect(() => {
-		//fetchSubmissions();
-	});
+		if (isLoading) {
+			axios
+				.get("https://aswprojectdjango.herokuapp.com/api/" + "news")
+				.then((response) => {
+					setData(response.data);
+				})
+				.then(() => {
+					setLoading(false);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	}, []);
+
+	if (isLoading) {
+		console.log("notLoaded --> " + data.length);
+		console.log(data[0]);
+		console.log(typeof data);
+		console.log(data[0]);
+		return <div className="App"></div>;
+	}
+
+	const renderItem = (value, index) => {
+		return (
+			<div>
+				<td align="right" valign="top" className="title">
+					<span className="rank">{index}. </span>
+				</td>
+				<td valign="top" className="votelinks">
+					<a id="up_{{ submission.id }}" href="../">
+						<div className="votearrow" title="upvote"></div>
+					</a>
+				</td>
+				{value.type === "url" ? (
+					<td className="title">
+						<a href="../" className="titlelink">
+							{value.title}{" "}
+						</a>
+						<span className="sitebit comhead">
+							(
+							<a href="../">
+								<span className="sitestr">{value.url}</span>
+							</a>
+							)
+						</span>
+					</td>
+				) : (
+					<td className="title">
+						<a href="../" className="titlelink">
+							{value.title}{" "}
+						</a>
+					</td>
+				)}
+				<tr>
+					<td colspan="2"></td>
+					<td className="subtext">
+						<span className="score" id="score_{{ submission.id }}">
+							{value.count} points{" "}
+						</span>{" "}
+						by
+						<Link
+							to={{
+								pathname: "/user",
+								search: "?id=1",
+							}}
+						>
+							{" "}
+							username
+						</Link>
+						<span className="age" title="2022-03-23T23:36:00">
+							{" "}
+							<a href="item/{{ submission.id }}">{value.posted_at_date} </a>
+						</span>
+						|{" "}
+						<a id="un_{{ submission.id }}" className="clicky" href="../">
+							unvote
+						</a>{" "}
+						| <a href="../">hide</a> | <a href="../"> 14 comments</a>
+					</td>
+				</tr>
+				<tr className="spacer" style={{ height: 20 }}></tr>
+			</div>
+		);
+	};
 
 	return (
 		<body>
@@ -73,61 +157,7 @@ function News() {
 								cellspacing="0"
 								className="itemlist"
 							>
-								<td align="right" valign="top" className="title">
-									<span className="rank">x. </span>
-								</td>
-								<td valign="top" className="votelinks">
-									<a id="up_{{ submission.id }}" href="../">
-										<div className="votearrow" title="upvote"></div>
-									</a>
-								</td>
-								<td className="title">
-									<a href="../" className="titlelink">
-										títol
-									</a>
-									<span className="sitebit comhead">
-										(
-										<a href="../">
-											<span className="sitestr">domini</span>
-										</a>
-										)
-									</span>
-									<a href="../" className="titlelink">
-										"títol"
-									</a>
-								</td>
-								<tr>
-									<td colspan="2"></td>
-									<td className="subtext">
-										<span className="score" id="score_{{ submission.id }}">
-											2 points{" "}
-										</span>{" "}
-										by
-										<Link
-											to={{
-												pathname: "/user",
-												search: "?id=1",
-											}}
-										>
-											{" "}
-											username
-										</Link>
-										<span className="age" title="2022-03-23T23:36:00">
-											{" "}
-											<a href="item/{{ submission.id }}">14 hours </a>
-										</span>
-										|
-										<a
-											id="un_{{ submission.id }}"
-											className="clicky"
-											href="../"
-										>
-											unvote
-										</a>{" "}
-										| <a href="../">hide</a> | <a href="../"> 14 comments</a>
-									</td>
-								</tr>
-								<tr className="spacer" style={{ height: 5 }}></tr>
+								{data.map((value, index) => renderItem(value, index))}
 							</table>
 						</td>
 					</tr>
