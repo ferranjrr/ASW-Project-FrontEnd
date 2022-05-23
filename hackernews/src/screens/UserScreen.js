@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { getRequest, putRequest } from "../db/persistence";
 
 import "../css/news.css";
 import logo from "../assets/gif/y18.gif";
