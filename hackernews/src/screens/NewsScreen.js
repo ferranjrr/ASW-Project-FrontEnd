@@ -27,10 +27,6 @@ function News() {
 	}, []);
 
 	if (isLoading) {
-		console.log("notLoaded --> " + data.length);
-		console.log(data[0]);
-		console.log(typeof data);
-		console.log(data[0]);
 		return <div className="App"></div>;
 	}
 
@@ -38,7 +34,7 @@ function News() {
 		return (
 			<div>
 				<td align="right" valign="top" className="title">
-					<span className="rank">{index}. </span>
+					<span className="rank">{index + 1}. </span>
 				</td>
 				<td valign="top" className="votelinks">
 					<a id="up_{{ submission.id }}" href="../">
@@ -71,25 +67,25 @@ function News() {
 						<span className="score" id="score_{{ submission.id }}">
 							{value.count} points{" "}
 						</span>{" "}
-						by
+						by{" "}
 						<Link
 							to={{
 								pathname: "/user",
-								search: "?id=1",
+								search: "?id=" + value.authorUsername,
 							}}
 						>
-							{" "}
-							username
+							{value.authorUsername}
 						</Link>
 						<span className="age" title="2022-03-23T23:36:00">
 							{" "}
-							<a href="item/{{ submission.id }}">{value.posted_at_date} </a>
+							<a href="item/{{ submission.id }}">{value.age} </a>
 						</span>
 						|{" "}
 						<a id="un_{{ submission.id }}" className="clicky" href="../">
 							unvote
 						</a>{" "}
-						| <a href="../">hide</a> | <a href="../"> 14 comments</a>
+						| <a href="../">hide</a> |{" "}
+						<a href="../"> {value.comments} comments</a>
 					</td>
 				</tr>
 				<tr className="spacer" style={{ height: 20 }}></tr>
@@ -134,8 +130,8 @@ function News() {
 											<b className="hnname">
 												<a href="../">Hacker News</a>
 											</b>
-											<a href="../">new</a> |<a href="../">threads</a> |
-											<a href="../">past</a> |<a href="../">ask</a> |
+											<a href="../">new</a> | <a href="../">threads</a> |{" "}
+											<a href="../">past</a> | <a href="../">ask</a> |{" "}
 											<a href="../">submit</a>
 										</span>
 									</td>
