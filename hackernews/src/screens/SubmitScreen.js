@@ -1,11 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import "../css/news.css";
-import logo from "../assets/gif/y18.gif";
 import axios from "axios";
 
 function SubmitForm () {
+  const navigate = useNavigate();
   const handleSubmission = (data) => {
     if (!data.url && !data.text) {
       setError("neitherURLorText", {
@@ -21,11 +22,11 @@ function SubmitForm () {
         )
         .then(function(response) {
             console.log(response);
+            navigate('/');
         })
         .catch(function(err) {
             console.log(err.response);
         });
-    reset();
   }
 
   const {
@@ -33,8 +34,7 @@ function SubmitForm () {
     handleSubmit,
     setError,
     formState: { errors },
-    clearErrors,
-    reset
+    clearErrors
   } = useForm();
 
   return (
