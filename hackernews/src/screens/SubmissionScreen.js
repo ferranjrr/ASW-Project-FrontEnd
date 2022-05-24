@@ -36,11 +36,50 @@ function Submission() {
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
+
+        const data = {
+            "id": 1,
+            "title": "Hello World!",
+            "url": "",
+            "text": "Hi",
+            "type": "ask",
+            "author": 3,
+            "posted_at_date": "2022-04-23",
+            "posted_at_time": "15:38:40.904",
+            "upvotes": 3,
+            "age": "1 days ago",
+            "authorUsername": "pau",
+            "comments": 0
+        }
+    
+    
+        //const data = JSON.parse(dataJSON);
+    
+        return (
+            
+            <pre>{JSON.stringify(data, null, 2)}</pre>
+        );
+
       return (
         <pre>{JSON.stringify(setItems, null, 2)}</pre>
 
       );
     }
+
+    */
+
+    const response = fetch("https://aswprojectdjango.herokuapp.com/api/news", {method: 'GET'});
+
+    const responseJ = response.json();
+
+    /*
+    .then(response => response.json()).return (
+            
+            <pre>{JSON.stringify(response, null, 2)}</pre>
+        );
+    //.then(response => { console.log(response);
+   // })
+    //.catch(err => { console.log(err); });
 */
     const data = {
         "id": 1,
@@ -61,8 +100,11 @@ function Submission() {
     //const data = JSON.parse(dataJSON);
 
     return (
-        <ul>{data.id}</ul>
+        
+        <pre>{JSON.stringify(responseJ, null, 2)}</pre>
     );
+
+    
 }
 
 
