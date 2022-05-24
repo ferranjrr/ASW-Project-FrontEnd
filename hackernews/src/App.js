@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import News from "./screens/NewsScreen";
 import User from "./screens/UserScreen";
+import Submission from "./screens/SubmissionScreen";
 
 function App() {
 	return (
@@ -9,7 +10,7 @@ function App() {
 				<Route path="/" element={<News />} />
 				<Route path="/news" element={<News />} />
 				<Route path="/user" element={<User />} />
-				<Route path="/submission/:id" element={<Submission />}/>
+				<Route path="/submission" element={<Submission />}/>
 			</Routes>
 		</div>
 	);

@@ -3,10 +3,80 @@ import { Link, useSearchParams } from "react-router-dom";
 
 import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
+//const axios = require('axios');
 
 function Submission() {
-    
+    /*const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [items, setItems] = useState([]);
+  
+    // Note: the empty deps array [] means
+    // this useEffect will run once
+    // similar to componentDidMount()
+    useEffect(() => {
+      fetch("https://aswprojectdjango.herokuapp.com/api/news", {method: 'GET'})
+        .then(res => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true);
+            setItems(result);
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        )
+    }, [])
+  
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <pre>{JSON.stringify(setItems, null, 2)}</pre>
 
+      );
+    }
+*/
+    const data = {
+        "id": 1,
+        "title": "Hello World!",
+        "url": "",
+        "text": "Hi",
+        "type": "ask",
+        "author": 3,
+        "posted_at_date": "2022-04-23",
+        "posted_at_time": "15:38:40.904",
+        "upvotes": 3,
+        "age": "1 days ago",
+        "authorUsername": "pau",
+        "comments": 0
+    }
+
+
+    //const data = JSON.parse(dataJSON);
+
+    return (
+        <ul>{data.id}</ul>
+    );
+}
+
+
+    /*
+    try {
+        const response = await fetch('https://aswprojectdjango.herokuapp.com/api/news', {method: 'GET'});
+        //const response = await axios.get('/api/news');
+        console.log('response ', response);
+        return response.data;
+        
+    }
+    catch(error) {
+        return [];
+    }
     
 
     return (    
@@ -40,9 +110,7 @@ function Submission() {
                                         <span class="pagetop">
                                             <b class="hnname"><a href="{% url 'news' %}">Hacker News</a></b>
                                             <a href="{% url 'newest' %}">new</a> |
-                                            {% if request.user.is_authenticated %}
                                             <a href="{% url 'threads' request.user.username %}">threads</a> |
-                                            {% endif %}
                                             {% yesterday as the_time %}
                                             <a href="{% url 'newsDate' the_time %}">past</a> |
                                             <a href="{% url 'ask' %}">ask</a> |
@@ -156,5 +224,5 @@ function Submission() {
         </body>
     );
 }
-
+*/
 export default Submission;
