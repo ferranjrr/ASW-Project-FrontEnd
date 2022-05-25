@@ -84,7 +84,7 @@ function News() {
 				</td>
 				{value.type === "url" ? (
 					<td className="title">
-						<a href={"/submission?id=" + value.id} className="titlelink">
+						<a href={"/submission/" + value.id} className="titlelink">
 							{value.title}{" "}
 						</a>
 						<span className="sitebit comhead">
@@ -97,7 +97,7 @@ function News() {
 					</td>
 				) : (
 					<td className="title">
-						<a href={"/submission?id=" + value.id} className="titlelink">
+						<a href={"/submission/" + value.id} className="titlelink">
 							{value.title}{" "}
 						</a>
 					</td>
@@ -129,9 +129,9 @@ function News() {
 							onClick={() => unvoteSubmission(value.id)}
 						>
 							unvote
-						</a>
-						{" | "}
-						<a href={"/submission?id=" + value.id}>{value.comments} comments</a>
+						</a>{" "}
+						| <a href="../">hide</a> |{" "}
+						<a href={"/submission/" + value.id}> {value.comments} comments</a>
 					</td>
 				</tr>
 				<tr className="spacer" style={{ height: 20 }}></tr>

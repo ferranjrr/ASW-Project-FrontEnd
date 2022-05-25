@@ -9,6 +9,7 @@ import Past from "./screens/PastScreen";
 import UserComments from "./screens/UserCommentsScreen";
 import UserThreads from "./screens/UserThreads";
 import ReplyForm from "./screens/ReplyScreen";
+import Newest from "./screens/NewestScreen";
 
 function App() {
 	return (
@@ -25,6 +26,7 @@ function App() {
 				<Route path="/user/comments" element={<UserComments />} />
 				<Route path="/threads" element={<UserThreads />} />
 				<Route path="/reply" element={<ReplyForm />} />
+				<Route path="/newest" element={<Newest />} />
 			</Routes>
 		</div>
 	);
