@@ -86,15 +86,15 @@ function UserThreads() {
 								<div style={{ marginTop: 2, marginBottom: -20 }}>
 									<span className="comhead">
 										<a href="../" class="hnuser">
-											{comment.author_id}
-										</a>
-										<span className="age" title={comment.posted_at_date}>
+											{comment.authorUsername}
+										</a>{" "}
+										<span className="age" title={comment.age}>
 											<a href="../">{comment.age}</a>
 										</span>
 										<span id="unv_30983269"></span>
 										<span className="onstory">
 											{" "}
-											| on: <a href="../">submissiontitleapi</a>{" "}
+											| on: <a href="../">{comment.title}</a>{" "}
 										</span>
 									</span>
 								</div>
