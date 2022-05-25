@@ -6,29 +6,19 @@ import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
 function UserComments() {
-	const location = useLocation();
+  const location = useLocation();
 	const [data, setData] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [isLoading, setLoading] = useState(true);
-	const yesterday = new Date(
-		Date.now() -
-			1 * 864e5 -
-			new Date(Date.now() - 1 * 864e5).getTimezoneOffset() * 6e4
-	)
-		.toISOString()
-		.split("T")[0];
+	const yesterday = new Date(Date.now() - 1 * 864e5 - new Date(Date.now() - 1 * 864e5).getTimezoneOffset() * 6e4).toISOString().split('T')[0]
 
 	useEffect(() => {
-		const queryParams = new URLSearchParams(location.search);
+	  const queryParams = new URLSearchParams(location.search);
 		const username = queryParams.get("username");
 		if (!username) return;
 		if (isLoading) {
 			axios
-				.get(
-					"https://aswprojectdjango.herokuapp.com/api/" +
-						username +
-						"/submissions"
-				)
+				.get("https://aswprojectdjango.herokuapp.com/api/" + username + "/comments")
 				.then((response) => {
 					setData(response.data);
 				})
@@ -45,106 +35,10 @@ function UserComments() {
 		return <div className="App"></div>;
 	}
 
-	function upvoteSubmission(submission_id) {
-		axios
-			.post(
-				"https://aswprojectdjango.herokuapp.com/api/submission/" +
-					submission_id +
-					"/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56"
-			)
-			.then((response) => {
-				console.log(response);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}
-
-	function unvoteSubmission(submission_id) {
-		axios
-			.delete(
-				"https://aswprojectdjango.herokuapp.com/api/submission/" +
-					submission_id +
-					"/unvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56"
-			)
-			.then((response) => {
-				console.log(response);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}
-
 	const renderItem = (value, index) => {
 		return (
-			<div>
-				<td align="right" valign="top" className="title">
-					<span className="rank">{index + 1}. </span>
-				</td>
-				<td valign="top" className="votelinks">
-					<a id="up_{{ submission.id }}" href="../">
-						<button
-							className="votearrow"
-							title="upvote"
-							onClick={() => upvoteSubmission(value.id)}
-						></button>
-					</a>
-				</td>
-				{value.type === "url" ? (
-					<td className="title">
-						<a href="../" className="titlelink">
-							{value.title}{" "}
-						</a>
-						<span className="sitebit comhead">
-							(
-							<a href="../">
-								<span className="sitestr">{value.url}</span>
-							</a>
-							)
-						</span>
-					</td>
-				) : (
-					<td className="title">
-						<a href="../" className="titlelink">
-							{value.title}{" "}
-						</a>
-					</td>
-				)}
-				<tr>
-					<td colspan="2"></td>
-					<td className="subtext">
-						<span className="score" id="score_{{ submission.id }}">
-							{value.count} points{" "}
-						</span>{" "}
-						by{" "}
-						<Link
-							to={{
-								pathname: "/user",
-								search: "?id=" + value.authorUsername,
-							}}
-						>
-							{value.authorUsername}
-						</Link>
-						<span className="age" title="2022-03-23T23:36:00">
-							{" "}
-							<a href="item/{{ submission.id }}">{value.age} </a>
-						</span>
-						|{" "}
-						<a
-							id="un_{{ submission.id }}"
-							className="clicky"
-							href="../"
-							onClick={() => unvoteSubmission(value.id)}
-						>
-							unvote
-						</a>{" "}
-						| <a href="../">hide</a> |{" "}
-						<a href="../"> {value.comments} comments</a>
-					</td>
-				</tr>
-				<tr className="spacer" style={{ height: 20 }}></tr>
-			</div>
-		);
+		    <div></div>
+		)
 	};
 
 	return (
@@ -185,8 +79,8 @@ function UserComments() {
 												<a href="../">Hacker News</a>
 											</b>
 											<a href="../newest">new</a> | <a href="../">threads</a> |{" "}
-											<a href={"../past?date=" + yesterday}>past</a> |{" "}
-											<a href="../ask">ask</a> | <a href="../submit">submit</a>
+											<a href={"../past?date="+yesterday}>past</a> | <a href="../ask">ask</a> |{" "}
+											<a href="../submit">submit</a>
 										</span>
 									</td>
 									<td style={{ textAlign: "right", paddingRight: 4 }}>
