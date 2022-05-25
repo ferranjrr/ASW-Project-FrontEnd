@@ -5,22 +5,16 @@ import axios from "axios";
 import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
-function Ask() {
+function News() {
 	const [data, setData] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [isLoading, setLoading] = useState(true);
-	const yesterday = new Date(
-		Date.now() -
-			1 * 864e5 -
-			new Date(Date.now() - 1 * 864e5).getTimezoneOffset() * 6e4
-	)
-		.toISOString()
-		.split("T")[0];
+    const yesterday = new Date(Date.now() - 1 * 864e5 - new Date(Date.now() - 1 * 864e5).getTimezoneOffset() * 6e4).toISOString().split('T')[0]
 
 	useEffect(() => {
 		if (isLoading) {
 			axios
-				.get("https://aswprojectdjango.herokuapp.com/api/" + "ask")
+				.get("https://aswprojectdjango.herokuapp.com/api/" + "newest")
 				.then((response) => {
 					setData(response.data);
 				})
@@ -37,34 +31,26 @@ function Ask() {
 		return <div className="App"></div>;
 	}
 
-	function upvoteSubmission(submission_id) {
-		axios
-			.post(
-				"https://aswprojectdjango.herokuapp.com/api/submission/" +
-					submission_id +
-					"/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56"
-			)
-			.then((response) => {
-				console.log(response);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+	function upvoteSubmission (submission_id) {
+	    axios
+				.post("https://aswprojectdjango.herokuapp.com/api/submission/" + submission_id + "/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 	}
 
-	function unvoteSubmission(submission_id) {
-		axios
-			.delete(
-				"https://aswprojectdjango.herokuapp.com/api/submission/" +
-					submission_id +
-					"/unvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56"
-			)
-			.then((response) => {
-				console.log(response);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+	function unvoteSubmission (submission_id) {
+	    axios
+				.delete("https://aswprojectdjango.herokuapp.com/api/submission/" + submission_id + "/unvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
 	}
 
 	const renderItem = (value, index) => {
@@ -75,18 +61,29 @@ function Ask() {
 				</td>
 				<td valign="top" className="votelinks">
 					<a id="up_{{ submission.id }}" href="../">
-						<div
-							className="votearrow"
-							title="upvote"
-							onClick={() => upvoteSubmission(value.id)}
-						></div>
+						<button className="votearrow" title="upvote" onClick={ () => upvoteSubmission(value.id)}></button>
 					</a>
 				</td>
-				<td className="title">
-					<a href={"/submission?id=" + value.id} className="titlelink">
-						{value.title}{" "}
-					</a>
-				</td>
+				{value.type === "url" ? (
+					<td className="title">
+						<a href={"/submission?id=" + value.id} className="titlelink">
+							{value.title}{" "}
+						</a>
+						<span className="sitebit comhead">
+							(
+							<a href={value.url} target="_blank">
+								<span className="sitestr">{value.url}</span>
+							</a>
+							)
+						</span>
+					</td>
+				) : (
+					<td className="title">
+						<a href={"/submission?id=" + value.id} className="titlelink">
+							{value.title}{" "}
+						</a>
+					</td>
+				)}
 				<tr>
 					<td colspan="2"></td>
 					<td className="subtext">
@@ -107,30 +104,11 @@ function Ask() {
 							<a href={"/past?date=" + value.posted_at_date}>{value.age} </a>
 						</span>
 						|{" "}
-						<a
-							className="clicky"
-							href="../"
-							onClick={() => upvoteSubmission(value.id)}
-						>
-							upvote
-						</a>{" "}
-						{" | "}
-						<a
-							className="clicky"
-							href="../"
-							onClick={() => unvoteSubmission(value.id)}
-						>
+						<a id="un_{{ submission.id }}" className="clicky" href="../" onClick={ () => unvoteSubmission(value.id)}>
 							unvote
 						</a>{" "}
-						{" | "}
-						<Link
-							to={{
-								pathname: "/submission",
-								search: "?id=" + value.id,
-							}}
-						>
-							{value.comments} comments
-						</Link>
+						| <a href="../">hide</a> |{" "}
+						<a href={"/submission?id=" + value.id}> {value.comments} comments</a>
 					</td>
 				</tr>
 				<tr className="spacer" style={{ height: 20 }}></tr>
@@ -175,19 +153,9 @@ function Ask() {
 											<b className="hnname">
 												<a href="../">Hacker News</a>
 											</b>
-											<a href="../newest">new</a>
-											{" | "}
-											<Link
-												to={{
-													pathname: "/threads",
-													search: "?user=" + "pau",
-												}}
-											>
-												threads
-											</Link>
-											{" | "}
-											<a href={"../past?date=" + yesterday}>past</a> |{" "}
-											<a href="../ask">ask</a> | <a href="../submit">submit</a>
+											<a href="../newest">new</a> | <a href="../threads?user=pau">threads</a> |{" "}
+											<a href={"../past?date="+yesterday}>past</a> | <a href="../ask">ask</a> |{" "}
+											<a href="../submit">submit</a>
 										</span>
 									</td>
 									<td style={{ textAlign: "right", paddingRight: 4 }}>
@@ -218,4 +186,4 @@ function Ask() {
 	);
 }
 
-export default Ask;
+export default News;
