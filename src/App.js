@@ -3,6 +3,7 @@ import News from "./screens/NewsScreen";
 import User from "./screens/UserScreen";
 import Submission from "./screens/SubmissionScreen";
 import UpvotedSubmissions from "./screens/UpvotedSubmissionsScreen";
+import UpvotedComments from "./screens/UpvotedCommentsScreen";
 import UserSubmissions from "./screens/UserSubmissionsScreen";
 import Ask from "./screens/AskScreen";
 import Past from "./screens/PastScreen";
@@ -24,6 +25,7 @@ function App() {
 				<Route path="/submit" element={<SubmitForm />} />
 				<Route path="/user" element={<User />} />
 				<Route path="/upvotedSubmissions" element={<UpvotedSubmissions />} />
+				<Route path="/upvotedComments" element={<UpvotedComments />} />
 				<Route path="/user/submissions" element={<UserSubmissions />} />
 				<Route path="/submission" element={<Submission />} />
 				<Route path="/reply" element={<ReplyForm />} />

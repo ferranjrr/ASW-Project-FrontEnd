@@ -161,7 +161,7 @@ function Submission() {
 							<td valign="top" className="votelinks">
 								<a
 									id="up_{{ submission.id }}"
-									href={"/submission?id=" + data.id}
+
 								>
 									<button
 										className="votearrow"
@@ -173,16 +173,11 @@ function Submission() {
 							<td className="default">
 								<div style={{ marginTop: 2, marginBottom: -20 }}>
 									<span className="comhead">
-										<Link
-											to={{
-												pathname: "/user",
-												search: "?id=" + comment.authorUsername,
-											}}
-										>
+										<a href={"../user?id=" + comment.authorUsername} class="hnuser">
 											{comment.authorUsername}
-										</Link>{" "}
+										</a>{" "}
 										<span className="age" title={comment.age}>
-											<span href="../">{comment.age}</span>
+											<a href={"/past?date=" + comment.posted_at_date}>{comment.age}</a>
 										</span>
 									</span>
 								</div>
@@ -304,16 +299,14 @@ function Submission() {
 											</a>
 										</td>
 										<td class="title">
-											<a href="{{ submission.url }}" class="titlelink">
-												{data.title}
-											</a>{" "}
-											{data.type === "url" && (
-												<span class="sitebit comhead">
-													<a href="{{ submission.url }}">
-														<span class="sitestr">({data.url})</span>
-													</a>
-												</span>
-											)}
+											<a href={"/submission?id=" + data.id} className="titlelink"> {data.title} </a>
+											<span class="sitebit comhead">
+												(
+												<a href={ data.url } target="_blank">
+													<span class="sitestr">{data.url}</span>
+												</a>
+												)
+											</span>
 										</td>
 										<td class="title">
 											<a
@@ -333,7 +326,7 @@ function Submission() {
 												{data.authorUsername}
 											</a>{" "}
 											<span class="age">
-												<span href="{% url 'detailedSubmission' submission.id %}">
+												<a href={"/past?date=" + data.posted_at_date}>
 													{data.age}
 												</span>
 											</span>{" "}
