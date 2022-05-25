@@ -5,6 +5,7 @@ import SubmitForm from "./screens/SubmitScreen";
 import UpvotedSubmissions from "./screens/UpvotedSubmissionsScreen";
 import UserSubmissions from "./screens/UserSubmissionsScreen";
 import Ask from "./screens/AskScreen";
+import Past from "./screens/PastScreen";
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 				<Route path="/upvotedSubmissions" element={<UpvotedSubmissions />} />
 				<Route path="/user/submissions" element={<UserSubmissions />} />
 				<Route path="/ask" element={<Ask />} />
+				<Route path="/past" element={<Past />} />
 			</Routes>
 		</div>
 	);

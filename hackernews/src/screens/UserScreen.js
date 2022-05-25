@@ -9,6 +9,7 @@ function User() {
 	const location = useLocation();
 	const [user, setUser] = useState(null);
 	const [isLoading, setLoading] = useState(true);
+	const yesterday = new Date(Date.now() - 1 * 864e5 - new Date(Date.now() - 1 * 864e5).getTimezoneOffset() * 6e4).toISOString().split('T')[0]
 
 	useEffect(() => {
 		const queryParams = new URLSearchParams(location.search);
@@ -69,7 +70,7 @@ function User() {
 												<a href="../">Hacker News</a>
 											</b>
 											<a href="../newest">new</a> | <a href="../">threads</a> |{" "}
-											<a href="../">past</a> | <a href="../ask">ask</a> |{" "}
+											<a href={"../past?date="+yesterday}>past</a> | <a href="../ask">ask</a> |{" "}
 											<a href="../submit">submit</a>
 										</span>
 									</td>

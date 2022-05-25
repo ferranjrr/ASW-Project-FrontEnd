@@ -5,7 +5,7 @@ import axios from "axios";
 import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
-function UserSubmissions() {
+function Past() {
     const location = useLocation();
 	const [data, setData] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -14,11 +14,11 @@ function UserSubmissions() {
 
 	useEffect(() => {
 	    const queryParams = new URLSearchParams(location.search);
-		const username = queryParams.get("username");
-		if (!username) return;
+		const date = queryParams.get("date");
+		if (!date) return;
 		if (isLoading) {
 			axios
-				.get("https://aswprojectdjango.herokuapp.com/api/" + username + "/submissions")
+				.get("https://aswprojectdjango.herokuapp.com/api/news/" + date)
 				.then((response) => {
 					setData(response.data);
 				})
@@ -168,4 +168,4 @@ function UserSubmissions() {
 	);
 }
 
-export default UserSubmissions;
+export default Past;
