@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link, useSearchParams, useLocation } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
-function Past() {
-	const location = useLocation();
+function News() {
 	const [data, setData] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [isLoading, setLoading] = useState(true);
@@ -19,12 +18,9 @@ function Past() {
 		.split("T")[0];
 
 	useEffect(() => {
-		const queryParams = new URLSearchParams(location.search);
-		const date = queryParams.get("date");
-		if (!date) return;
 		if (isLoading) {
 			axios
-				.get("https://aswprojectdjango.herokuapp.com/api/news/" + date)
+				.get("https://aswprojectdjango.herokuapp.com/api/" + "newest")
 				.then((response) => {
 					setData(response.data);
 				})
@@ -42,6 +38,7 @@ function Past() {
 	}
 
 	function upvoteSubmission(submission_id) {
+		console.log("ni?");
 		axios
 			.post(
 				"https://aswprojectdjango.herokuapp.com/api/submission/" +
@@ -78,17 +75,17 @@ function Past() {
 					<span className="rank">{index + 1}. </span>
 				</td>
 				<td valign="top" className="votelinks">
-					<a id="up_{{ submission.id }}" href="../">
-						<button
+					<a href="../">
+						<div
 							className="votearrow"
 							title="upvote"
 							onClick={() => upvoteSubmission(value.id)}
-						></button>
+						></div>
 					</a>
 				</td>
 				{value.type === "url" ? (
 					<td className="title">
-						<a href={"/submission?id=" + value.id} className="titlelink">
+						<a href={"/submission/" + value.id} className="titlelink">
 							{value.title}{" "}
 						</a>
 						<span className="sitebit comhead">
@@ -101,7 +98,7 @@ function Past() {
 					</td>
 				) : (
 					<td className="title">
-						<a href={"/submission?id=" + value.id} className="titlelink">
+						<a href={"/submission/" + value.id} className="titlelink">
 							{value.title}{" "}
 						</a>
 					</td>
@@ -127,18 +124,29 @@ function Past() {
 						</span>
 						|{" "}
 						<a
-							id="un_{{ submission.id }}"
+							className="clicky"
+							href="../"
+							onClick={() => upvoteSubmission(value.id)}
+						>
+							upvote
+						</a>{" "}
+						{" | "}
+						<a
 							className="clicky"
 							href="../"
 							onClick={() => unvoteSubmission(value.id)}
 						>
 							unvote
-						</a>
+						</a>{" "}
 						{" | "}
-						<a href={"/submission?id=" + value.id}>
-							{" "}
+						<Link
+							to={{
+								pathname: "/submission",
+								search: "?id=" + value.id,
+							}}
+						>
 							{value.comments} comments
-						</a>
+						</Link>
 					</td>
 				</tr>
 				<tr className="spacer" style={{ height: 20 }}></tr>
@@ -183,7 +191,17 @@ function Past() {
 											<b className="hnname">
 												<a href="../">Hacker News</a>
 											</b>
-											<a href="../newest">new</a> | <a href="../">threads</a> |{" "}
+											<a href="../newest">new</a>
+											{" | "}
+											<Link
+												to={{
+													pathname: "/threads",
+													search: "?user=" + "pau",
+												}}
+											>
+												threads
+											</Link>
+											{" | "}
 											<a href={"../past?date=" + yesterday}>past</a> |{" "}
 											<a href="../ask">ask</a> | <a href="../submit">submit</a>
 										</span>
@@ -216,4 +234,4 @@ function Past() {
 	);
 }
 
-export default Past;
+export default News;

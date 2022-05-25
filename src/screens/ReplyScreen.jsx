@@ -28,7 +28,7 @@ function ReplyForm () {
         )
         .then(function(response) {
             console.log(response);
-            navigate('/submission/' + data.submission_id);
+            navigate('/submission?id=' + data.submission_id);
         })
         .catch(function(err) {
             console.log(err.response);
