@@ -1,17 +1,109 @@
 import React, { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import axios from "axios";
 
-//import axios from "axios";
 import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
 function News() {
-	const [data, setData] = useState(null);
+	const [data, setData] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
+	const [isLoading, setLoading] = useState(true);
+    const yesterday = new Date(Date.now() - 1 * 864e5 - new Date(Date.now() - 1 * 864e5).getTimezoneOffset() * 6e4).toISOString().split('T')[0]
 
 	useEffect(() => {
-		//fetchSubmissions();
-	});
+		if (isLoading) {
+			axios
+				.get("https://aswprojectdjango.herokuapp.com/api/" + "news")
+				.then((response) => {
+					setData(response.data);
+				})
+				.then(() => {
+					setLoading(false);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		}
+	}, []);
+
+	if (isLoading) {
+		return <div className="App"></div>;
+	}
+
+	const upvoteSubmission = (submission_id) => {
+	    axios
+				.post("https://aswprojectdjango.herokuapp.com/api/submission/" + submission_id + "/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+	}
+
+	const renderItem = (value, index) => {
+		return (
+			<div>
+				<td align="right" valign="top" className="title">
+					<span className="rank">{index + 1}. </span>
+				</td>
+				<td valign="top" className="votelinks">
+					<a id="up_{{ submission.id }}" href="../" onClick={upvoteSubmission(value.id)}>
+						<div className="votearrow" title="upvote"></div>
+					</a>
+				</td>
+				{value.type === "url" ? (
+					<td className="title">
+						<a href="../" className="titlelink">
+							{value.title}{" "}
+						</a>
+						<span className="sitebit comhead">
+							(
+							<a href="../">
+								<span className="sitestr">{value.url}</span>
+							</a>
+							)
+						</span>
+					</td>
+				) : (
+					<td className="title">
+						<a href="../" className="titlelink">
+							{value.title}{" "}
+						</a>
+					</td>
+				)}
+				<tr>
+					<td colspan="2"></td>
+					<td className="subtext">
+						<span className="score" id="score_{{ submission.id }}">
+							{value.count} points{" "}
+						</span>{" "}
+						by{" "}
+						<Link
+							to={{
+								pathname: "/user",
+								search: "?id=" + value.authorUsername,
+							}}
+						>
+							{value.authorUsername}
+						</Link>
+						<span className="age" title="2022-03-23T23:36:00">
+							{" "}
+							<a href="item/{{ submission.id }}">{value.age} </a>
+						</span>
+						|{" "}
+						<a id="un_{{ submission.id }}" className="clicky" href="../">
+							unvote
+						</a>{" "}
+						| <a href="../">hide</a> |{" "}
+						<a href="../"> {value.comments} comments</a>
+					</td>
+				</tr>
+				<tr className="spacer" style={{ height: 20 }}></tr>
+			</div>
+		);
+	};
 
 	return (
 		<body>
@@ -50,9 +142,9 @@ function News() {
 											<b className="hnname">
 												<a href="../">Hacker News</a>
 											</b>
-											<a href="../">new</a> |<a href="../">threads</a> |
-											<a href="../">past</a> |<a href="../">ask</a> |
-											<a href="../">submit</a>
+											<a href="../newest">new</a> | <a href="../">threads</a> |{" "}
+											<a href={"../past?date="+yesterday}>past</a> | <a href="../ask">ask</a> |{" "}
+											<a href="../submit">submit</a>
 										</span>
 									</td>
 									<td style={{ textAlign: "right", paddingRight: 4 }}>
@@ -73,61 +165,7 @@ function News() {
 								cellspacing="0"
 								className="itemlist"
 							>
-								<td align="right" valign="top" className="title">
-									<span className="rank">x. </span>
-								</td>
-								<td valign="top" className="votelinks">
-									<a id="up_{{ submission.id }}" href="../">
-										<div className="votearrow" title="upvote"></div>
-									</a>
-								</td>
-								<td className="title">
-									<a href="../" className="titlelink">
-										títol
-									</a>
-									<span className="sitebit comhead">
-										(
-										<a href="../">
-											<span className="sitestr">domini</span>
-										</a>
-										)
-									</span>
-									<a href="../" className="titlelink">
-										"títol"
-									</a>
-								</td>
-								<tr>
-									<td colspan="2"></td>
-									<td className="subtext">
-										<span className="score" id="score_{{ submission.id }}">
-											2 points{" "}
-										</span>{" "}
-										by
-										<Link
-											to={{
-												pathname: "/user",
-												search: "?id=1",
-											}}
-										>
-											{" "}
-											username
-										</Link>
-										<span className="age" title="2022-03-23T23:36:00">
-											{" "}
-											<a href="item/{{ submission.id }}">14 hours </a>
-										</span>
-										|
-										<a
-											id="un_{{ submission.id }}"
-											className="clicky"
-											href="../"
-										>
-											unvote
-										</a>{" "}
-										| <a href="../">hide</a> | <a href="../"> 14 comments</a>
-									</td>
-								</tr>
-								<tr className="spacer" style={{ height: 5 }}></tr>
+								{data.map((value, index) => renderItem(value, index))}
 							</table>
 						</td>
 					</tr>
