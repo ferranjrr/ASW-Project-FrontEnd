@@ -31,9 +31,20 @@ function Ask() {
 		return <div className="App"></div>;
 	}
 
-	const upvoteSubmission = (submission_id) => {
+    function upvoteSubmission (submission_id) {
 	    axios
 				.post("https://aswprojectdjango.herokuapp.com/api/submission/" + submission_id + "/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+	}
+
+	function unvoteSubmission (submission_id) {
+	    axios
+				.delete("https://aswprojectdjango.herokuapp.com/api/submission/" + submission_id + "/unvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
 				.then((response) => {
 					console.log(response);
 				})
@@ -49,8 +60,8 @@ function Ask() {
 					<span className="rank">{index + 1}. </span>
 				</td>
 				<td valign="top" className="votelinks">
-					<a id="up_{{ submission.id }}" href="../" onClick={upvoteSubmission(value.id)}>
-						<div className="votearrow" title="upvote"></div>
+					<a id="up_{{ submission.id }}" href="../">
+						<button className="votearrow" title="upvote" onClick={ () => upvoteSubmission(value.id)}></button>
 					</a>
 				</td>
 				{value.type === "url" ? (
@@ -93,7 +104,7 @@ function Ask() {
 							<a href="item/{{ submission.id }}">{value.age} </a>
 						</span>
 						|{" "}
-						<a id="un_{{ submission.id }}" className="clicky" href="../">
+						<a id="un_{{ submission.id }}" className="clicky" href="../" onClick={ () => unvoteSubmission(value.id)}>
 							unvote
 						</a>{" "}
 						| <a href="../">hide</a> |{" "}
