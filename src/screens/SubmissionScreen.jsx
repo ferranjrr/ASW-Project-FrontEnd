@@ -103,11 +103,16 @@ function Submission() {
 							<td className="default">
 								<div style={{ marginTop: 2, marginBottom: -20 }}>
 									<span className="comhead">
-										<a href="../" class="hnuser">
+										<Link
+											to={{
+												pathname: "/user",
+												search: "?id=" + comment.authorUsername,
+											}}
+										>
 											{comment.authorUsername}
-										</a>{" "}
+										</Link>{" "}
 										<span className="age" title={comment.age}>
-											<a href="../">{comment.age}</a>
+											<span href="../">{comment.age}</span>
 										</span>
 									</span>
 								</div>
@@ -172,7 +177,17 @@ function Submission() {
 											<b class="hnname">
 												<a href="../">Hacker News</a>
 											</b>
-											<a href="../newest">new</a> | <a href="../">threads</a> |{" "}
+											<a href="../newest">new</a>
+											{" | "}
+											<Link
+												to={{
+													pathname: "/threads",
+													search: "?user=" + "pau",
+												}}
+											>
+												threads
+											</Link>
+											{" | "}
 											<a href={"../past?date=" + yesterday}>past</a> |{" "}
 											<a href="../ask">ask</a> | <a href="../submit">submit</a>
 										</span>
@@ -209,14 +224,16 @@ function Submission() {
 											</center>
 										</td>
 										<td class="title">
-											<a href="{{ submission.url }}" class="titlelink"></a>
-											<span class="sitebit comhead">
-												(
-												<a href="{{ submission.url }}">
-													<span class="sitestr">{data.url}</span>
-												</a>
-												)
-											</span>
+											<a href="{{ submission.url }}" class="titlelink">
+												{data.title}
+											</a>{" "}
+											{data.type === "url" && (
+												<span class="sitebit comhead">
+													<a href="{{ submission.url }}">
+														<span class="sitestr">({data.url})</span>
+													</a>
+												</span>
+											)}
 										</td>
 										<td class="title">
 											<a
@@ -236,13 +253,19 @@ function Submission() {
 												{data.authorUsername}
 											</a>{" "}
 											<span class="age">
-												<a href="{% url 'detailedSubmission' submission.id %}">
+												<sp href="{% url 'detailedSubmission' submission.id %}">
 													{data.age}
-												</a>
+												</sp>
 											</span>{" "}
-											<a href="{% url 'detailedSubmission' submission.id %}">
+											{" | "}
+											<Link
+												to={{
+													pathname: "/submission",
+													search: "?id=" + data.id,
+												}}
+											>
 												{data.comments} comments
-											</a>
+											</Link>
 										</td>
 									</tr>
 									<tr style={{ height: 2 }}></tr>
