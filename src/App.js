@@ -7,6 +7,7 @@ import UserSubmissions from "./screens/UserSubmissionsScreen";
 import Ask from "./screens/AskScreen";
 import Past from "./screens/PastScreen";
 import UserComments from "./screens/UserCommentsScreen";
+import UserThreads from "./screens/UserThreads";
 import ReplyForm from "./screens/ReplyScreen";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 				<Route path="/ask" element={<Ask />} />
 				<Route path="/past" element={<Past />} />
 				<Route path="/user/comments" element={<UserComments />} />
+				<Route path="/threads" element={<UserThreads />} />
 				<Route path="/reply" element={<ReplyForm />} />
 			</Routes>
 		</div>
