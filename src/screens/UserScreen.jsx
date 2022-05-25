@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 import "../css/news.css";
 import logo from "../assets/gif/y18.gif";
@@ -101,7 +101,17 @@ function User() {
 											<b class="hnname">
 												<a href="../">Hacker News</a>
 											</b>
-											<a href="../newest">new</a> | <a href="../threads?user=pau">threads</a> |{" "}
+											<a href="../newest">new</a>
+											{" | "}
+											<Link
+												to={{
+													pathname: "/threads",
+													search: "?user=" + "pau",
+												}}
+											>
+												threads
+											</Link>
+											{" | "}
 											<a href={"../past?date=" + yesterday}>past</a> |{" "}
 											<a href="../ask">ask</a> | <a href="../submit">submit</a>
 										</span>
@@ -259,9 +269,15 @@ function User() {
 										<tr>
 											<td></td>
 											<td>
-												<a href={"/threads?user=" + user.username}>
-													<u>comments</u>
-												</a>
+												<Link
+													style={{ textDecoration: "underline grey" }}
+													to={{
+														pathname: "/threads",
+														search: "?user=" + user.username,
+													}}
+												>
+													comments
+												</Link>
 											</td>
 										</tr>
 										<tr>

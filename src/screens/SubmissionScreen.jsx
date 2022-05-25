@@ -218,7 +218,21 @@ function Submission() {
 											<b class="hnname">
 												<a href="../">Hacker News</a>
 											</b>
+<<<<<<< HEAD
+											<a href="../newest">new</a>
+											{" | "}
+											<Link
+												to={{
+													pathname: "/threads",
+													search: "?user=" + "pau",
+												}}
+											>
+												threads
+											</Link>
+											{" | "}
+=======
 											<a href="../newest">new</a> | <a href="../threads?user=pau">threads</a> |{" "}
+>>>>>>> 2e9496ae3c4cc1ff708498542197c271bf2bb02d
 											<a href={"../past?date=" + yesterday}>past</a> |{" "}
 											<a href="../ask">ask</a> | <a href="../submit">submit</a>
 										</span>
@@ -249,6 +263,18 @@ function Submission() {
                                             </a>
                                         </td>
 										<td class="title">
+<<<<<<< HEAD
+											<a href="{{ submission.url }}" class="titlelink">
+												{data.title}
+											</a>{" "}
+											{data.type === "url" && (
+												<span class="sitebit comhead">
+													<a href="{{ submission.url }}">
+														<span class="sitestr">({data.url})</span>
+													</a>
+												</span>
+											)}
+=======
 											<a href={"/submission?id=" + data.id} className="titlelink"> {data.title} </a>
 											<span class="sitebit comhead">
 												(
@@ -257,6 +283,7 @@ function Submission() {
 												</a>
 												)
 											</span>
+>>>>>>> 2e9496ae3c4cc1ff708498542197c271bf2bb02d
 										</td>
 										<td class="title">
 											<a
@@ -276,13 +303,27 @@ function Submission() {
 												{data.authorUsername}
 											</a>{" "}
 											<span class="age">
+<<<<<<< HEAD
+												<sp href="{% url 'detailedSubmission' submission.id %}">
+=======
 												<a href={"/past?date=" + data.posted_at_date}>
+>>>>>>> 2e9496ae3c4cc1ff708498542197c271bf2bb02d
 													{data.age}
-												</a>
+												</sp>
 											</span>{" "}
+<<<<<<< HEAD
+											{" | "}
+											<Link
+												to={{
+													pathname: "/submission",
+													search: "?id=" + data.id,
+												}}
+											>
+=======
 											<a href={"/submission?id=" + data.id}>
+>>>>>>> 2e9496ae3c4cc1ff708498542197c271bf2bb02d
 												{data.comments} comments
-											</a>
+											</Link>
 										</td>
 									</tr>
 									<tr style={{ height: 2 }}></tr>

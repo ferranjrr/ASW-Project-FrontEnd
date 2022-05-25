@@ -93,6 +93,7 @@ function News() {
 							{value.title}
 						</Link>
 						<span className="sitebit comhead">
+							{" "}
 							(
 							<a href={value.url} target="_blank">
 								<span className="sitestr">{value.url}</span>
@@ -133,15 +134,29 @@ function News() {
 						</span>
 						|{" "}
 						<a
-							id="un_{{ submission.id }}"
+							className="clicky"
+							href="../"
+							onClick={() => upvoteSubmission(value.id)}
+						>
+							upvote
+						</a>{" "}
+						{" | "}
+						<a
 							className="clicky"
 							href="../"
 							onClick={() => unvoteSubmission(value.id)}
 						>
 							unvote
 						</a>{" "}
-						| <a href="../">hide</a> |{" "}
-						<a href={"/submission?id=" + value.id}> {value.comments} comments</a>
+						{" | "}
+						<Link
+							to={{
+								pathname: "/submission",
+								search: "?id=" + value.id,
+							}}
+						>
+							{value.comments} comments
+						</Link>
 					</td>
 				</tr>
 				<tr className="spacer" style={{ height: 20 }}></tr>

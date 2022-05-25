@@ -85,9 +85,14 @@ function UserThreads() {
 							<td className="default">
 								<div style={{ marginTop: 2, marginBottom: -20 }}>
 									<span className="comhead">
-										<a href="../" class="hnuser">
+										<Link
+											to={{
+												pathname: "/user",
+												search: "?id=" + comment.authorUsername,
+											}}
+										>
 											{comment.authorUsername}
-										</a>{" "}
+										</Link>{" "}
 										<span className="age" title={comment.age}>
 											<a href="../">{comment.age}</a>
 										</span>
@@ -159,7 +164,17 @@ function UserThreads() {
 											<b className="hnname">
 												<a href="../">Hacker News</a>
 											</b>
-											<a href="../newest">new</a> | <a href="../threads?user=pau">threads</a> |{" "}
+											<a href="../newest">new</a>
+											{" | "}
+											<Link
+												to={{
+													pathname: "/threads",
+													search: "?user=" + "pau",
+												}}
+											>
+												threads
+											</Link>
+											{" | "}
 											<a href={"../past?date=" + yesterday}>past</a> |{" "}
 											<a href="../ask">ask</a> | <a href="../submit">submit</a>
 										</span>

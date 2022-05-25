@@ -75,11 +75,11 @@ function Ask() {
 				</td>
 				<td valign="top" className="votelinks">
 					<a id="up_{{ submission.id }}" href="../">
-						<button
+						<div
 							className="votearrow"
 							title="upvote"
 							onClick={() => upvoteSubmission(value.id)}
-						></button>
+						></div>
 					</a>
 				</td>
 				<td className="title">
@@ -108,18 +108,29 @@ function Ask() {
 						</span>
 						|{" "}
 						<a
-							id="un_{{ submission.id }}"
+							className="clicky"
+							href="../"
+							onClick={() => upvoteSubmission(value.id)}
+						>
+							upvote
+						</a>{" "}
+						{" | "}
+						<a
 							className="clicky"
 							href="../"
 							onClick={() => unvoteSubmission(value.id)}
 						>
 							unvote
-						</a>
+						</a>{" "}
 						{" | "}
-						<a href={"/submission?id=" + value.id}>
-							{" "}
+						<Link
+							to={{
+								pathname: "/submission",
+								search: "?id=" + value.id,
+							}}
+						>
 							{value.comments} comments
-						</a>
+						</Link>
 					</td>
 				</tr>
 				<tr className="spacer" style={{ height: 20 }}></tr>
@@ -164,7 +175,17 @@ function Ask() {
 											<b className="hnname">
 												<a href="../">Hacker News</a>
 											</b>
-											<a href="../newest">new</a> | <a href="../threads?user=pau">threads</a> |{" "}
+											<a href="../newest">new</a>
+											{" | "}
+											<Link
+												to={{
+													pathname: "/threads",
+													search: "?user=" + "pau",
+												}}
+											>
+												threads
+											</Link>
+											{" | "}
 											<a href={"../past?date=" + yesterday}>past</a> |{" "}
 											<a href="../ask">ask</a> | <a href="../submit">submit</a>
 										</span>
