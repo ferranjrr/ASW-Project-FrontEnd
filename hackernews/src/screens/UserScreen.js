@@ -248,7 +248,7 @@ function User() {
 										<tr>
 											<td></td>
 											<td>
-												<a href="../">
+												<a href={"/user/submissions?username=" + user.username}>
 													<u>submissions</u>
 												</a>
 											</td>
@@ -256,7 +256,7 @@ function User() {
 										<tr>
 											<td></td>
 											<td>
-												<a href="../">
+												<a href={"/user/comments?username=" + user.username}>
 													<u>comments</u>
 												</a>
 											</td>
@@ -264,11 +264,11 @@ function User() {
 										<tr>
 											<td></td>
 											<td>
-												<a href="../">
+												<a href="/upvotedSubmissions">
 													<u>upvoted submissions</u>
 												</a>{" "}
 												/
-												<a href="../">
+												<a href="/upvotedComments">
 													<u>comments</u>
 												</a>
 												&nbsp;
@@ -284,7 +284,7 @@ function User() {
 									<tr class="athing">
 										<td valign="top">user:</td>
 										<td>
-											<a href="../" class="hnuser">
+											<a class="hnuser">
 												<font color="#3c963c">{user.username}</font>
 											</a>
 										</td>
@@ -292,7 +292,7 @@ function User() {
 									<tr>
 										<td valign="top">created:</td>
 										<td>
-											<a href="../}">{user.created_at_date}</a>
+											<a>{user.age}</a>
 										</td>
 									</tr>
 									<tr>
@@ -306,7 +306,7 @@ function User() {
 									<tr>
 										<td></td>
 										<td>
-											<a href="../">
+											<a href={"/user/submissions?username=" + user.username}>
 												<u>submissions</u>
 											</a>
 										</td>
@@ -314,7 +314,7 @@ function User() {
 									<tr>
 										<td></td>
 										<td>
-											<a href="../">
+											<a href={"/user/comments?username=" + user.username}>
 												<u>comments</u>
 											</a>
 										</td>
