@@ -5,16 +5,16 @@ import axios from "axios";
 import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
-function UpvotedSubmissions() {
+function News() {
 	const [data, setData] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [isLoading, setLoading] = useState(true);
-	const yesterday = new Date(Date.now() - 1 * 864e5 - new Date(Date.now() - 1 * 864e5).getTimezoneOffset() * 6e4).toISOString().split('T')[0]
+    const yesterday = new Date(Date.now() - 1 * 864e5 - new Date(Date.now() - 1 * 864e5).getTimezoneOffset() * 6e4).toISOString().split('T')[0]
 
 	useEffect(() => {
 		if (isLoading) {
 			axios
-				.get("https://aswprojectdjango.herokuapp.com/api/upvotedSubmissions?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
+				.get("https://aswprojectdjango.herokuapp.com/api/" + "newest")
 				.then((response) => {
 					setData(response.data);
 				})
@@ -66,12 +66,12 @@ function UpvotedSubmissions() {
 				</td>
 				{value.type === "url" ? (
 					<td className="title">
-						<a href="../" className="titlelink">
+						<a href={"/submission/" + value.id} className="titlelink">
 							{value.title}{" "}
 						</a>
 						<span className="sitebit comhead">
 							(
-							<a href="../">
+							<a href={value.url} target="_blank">
 								<span className="sitestr">{value.url}</span>
 							</a>
 							)
@@ -79,7 +79,7 @@ function UpvotedSubmissions() {
 					</td>
 				) : (
 					<td className="title">
-						<a href="../" className="titlelink">
+						<a href={"/submission/" + value.id} className="titlelink">
 							{value.title}{" "}
 						</a>
 					</td>
@@ -101,14 +101,14 @@ function UpvotedSubmissions() {
 						</Link>
 						<span className="age" title="2022-03-23T23:36:00">
 							{" "}
-							<a href="item/{{ submission.id }}">{value.age} </a>
+							<a href={"/past?date=" + value.posted_at_date}>{value.age} </a>
 						</span>
 						|{" "}
 						<a id="un_{{ submission.id }}" className="clicky" href="../" onClick={ () => unvoteSubmission(value.id)}>
 							unvote
 						</a>{" "}
 						| <a href="../">hide</a> |{" "}
-						<a href="../"> {value.comments} comments</a>
+						<a href={"/submission/" + value.id}> {value.comments} comments</a>
 					</td>
 				</tr>
 				<tr className="spacer" style={{ height: 20 }}></tr>
@@ -186,4 +186,4 @@ function UpvotedSubmissions() {
 	);
 }
 
-export default UpvotedSubmissions;
+export default News;
