@@ -5,7 +5,7 @@ import axios from "axios";
 import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
-function UserSubmissions() {
+function UserComments() {
     const location = useLocation();
 	const [data, setData] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -18,7 +18,7 @@ function UserSubmissions() {
 		if (!username) return;
 		if (isLoading) {
 			axios
-				.get("https://aswprojectdjango.herokuapp.com/api/" + username + "/submissions")
+				.get("https://aswprojectdjango.herokuapp.com/api/" + username + "/comments")
 				.then((response) => {
 					setData(response.data);
 				})
@@ -35,89 +35,10 @@ function UserSubmissions() {
 		return <div className="App"></div>;
 	}
 
-	function upvoteSubmission (submission_id) {
-	    axios
-				.post("https://aswprojectdjango.herokuapp.com/api/submission/" + submission_id + "/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
-				.then((response) => {
-					console.log(response);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-	}
-
-	function unvoteSubmission (submission_id) {
-	    axios
-				.delete("https://aswprojectdjango.herokuapp.com/api/submission/" + submission_id + "/unvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
-				.then((response) => {
-					console.log(response);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
-	}
-
 	const renderItem = (value, index) => {
 		return (
-			<div>
-				<td align="right" valign="top" className="title">
-					<span className="rank">{index + 1}. </span>
-				</td>
-				<td valign="top" className="votelinks">
-					<a id="up_{{ submission.id }}" href="../">
-						<button className="votearrow" title="upvote" onClick={ () => upvoteSubmission(value.id)}></button>
-					</a>
-				</td>
-				{value.type === "url" ? (
-					<td className="title">
-						<a href={"/submission?id=" + value.id} className="titlelink">
-							{value.title}{" "}
-						</a>
-						<span className="sitebit comhead">
-							(
-							<a href={value.url} target="_blank">
-								<span className="sitestr">{value.url}</span>
-							</a>
-							)
-						</span>
-					</td>
-				) : (
-					<td className="title">
-						<a href={"/submission?id=" + value.id} className="titlelink">
-							{value.title}{" "}
-						</a>
-					</td>
-				)}
-				<tr>
-					<td colspan="2"></td>
-					<td className="subtext">
-						<span className="score" id="score_{{ submission.id }}">
-							{value.count} points{" "}
-						</span>{" "}
-						by{" "}
-						<Link
-							to={{
-								pathname: "/user",
-								search: "?id=" + value.authorUsername,
-							}}
-						>
-							{value.authorUsername}
-						</Link>
-						<span className="age" title="2022-03-23T23:36:00">
-							{" "}
-							<a href={"/past?date=" + value.posted_at_date}>{value.age} </a>
-						</span>
-						|{" "}
-						<a id="un_{{ submission.id }}" className="clicky" href="../" onClick={ () => unvoteSubmission(value.id)}>
-							unvote
-						</a>{" "}
-						| <a href="../">hide</a> |{" "}
-						<a href={"/submission?id=" + value.id}> {value.comments} comments</a>
-					</td>
-				</tr>
-				<tr className="spacer" style={{ height: 20 }}></tr>
-			</div>
-		);
+		    <div></div>
+		)
 	};
 
 	return (
@@ -190,4 +111,4 @@ function UserSubmissions() {
 	);
 }
 
-export default UserSubmissions;
+export default UserComments;

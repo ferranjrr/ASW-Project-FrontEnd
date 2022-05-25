@@ -70,12 +70,12 @@ function Past() {
 				</td>
 				{value.type === "url" ? (
 					<td className="title">
-						<a href="../" className="titlelink">
+						<a href={"/submission?id=" + value.id} className="titlelink">
 							{value.title}{" "}
 						</a>
 						<span className="sitebit comhead">
 							(
-							<a href="../">
+							<a href={value.url} target="_blank">
 								<span className="sitestr">{value.url}</span>
 							</a>
 							)
@@ -83,7 +83,7 @@ function Past() {
 					</td>
 				) : (
 					<td className="title">
-						<a href="../" className="titlelink">
+						<a href={"/submission?id=" + value.id} className="titlelink">
 							{value.title}{" "}
 						</a>
 					</td>
@@ -105,14 +105,14 @@ function Past() {
 						</Link>
 						<span className="age" title="2022-03-23T23:36:00">
 							{" "}
-							<a href="item/{{ submission.id }}">{value.age} </a>
+							<a href={"/past?date=" + value.posted_at_date}>{value.age} </a>
 						</span>
 						|{" "}
 						<a id="un_{{ submission.id }}" className="clicky" href="../" onClick={ () => unvoteSubmission(value.id)}>
 							unvote
 						</a>{" "}
 						| <a href="../">hide</a> |{" "}
-						<a href="../"> {value.comments} comments</a>
+						<a href={"/submission?id=" + value.id}> {value.comments} comments</a>
 					</td>
 				</tr>
 				<tr className="spacer" style={{ height: 20 }}></tr>
