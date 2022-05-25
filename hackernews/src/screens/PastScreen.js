@@ -35,6 +35,17 @@ function Past() {
 		return <div className="App"></div>;
 	}
 
+	const upvoteSubmission = (submission_id) => {
+	    axios
+				.post("https://aswprojectdjango.herokuapp.com/api/submission/" + submission_id + "/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+	}
+
 	const renderItem = (value, index) => {
 		return (
 			<div>
@@ -42,7 +53,7 @@ function Past() {
 					<span className="rank">{index + 1}. </span>
 				</td>
 				<td valign="top" className="votelinks">
-					<a id="up_{{ submission.id }}" href="../">
+					<a id="up_{{ submission.id }}" href="../" onClick={upvoteSubmission(value.id)}>
 						<div className="votearrow" title="upvote"></div>
 					</a>
 				</td>

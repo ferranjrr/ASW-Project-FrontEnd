@@ -6,6 +6,7 @@ import UpvotedSubmissions from "./screens/UpvotedSubmissionsScreen";
 import UserSubmissions from "./screens/UserSubmissionsScreen";
 import Ask from "./screens/AskScreen";
 import Past from "./screens/PastScreen";
+import UserComments from "./screens/UserCommentsScreen";
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 				<Route path="/user/submissions" element={<UserSubmissions />} />
 				<Route path="/ask" element={<Ask />} />
 				<Route path="/past" element={<Past />} />
+				<Route path="/user/comments" element={<UserComments />} />
 			</Routes>
 		</div>
 	);
