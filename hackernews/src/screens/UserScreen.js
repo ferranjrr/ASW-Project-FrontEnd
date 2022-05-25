@@ -108,7 +108,10 @@ function User() {
 									</td>
 									<td style={{ textAlign: "right", paddingRight: 4 }}>
 										<span class="pagetop">
-											<a href="../">login</a>
+											<a href="../">pau ({user.karma}) | </a>
+											<a id="logout" href="../">
+												logout
+											</a>
 										</span>
 									</td>
 								</tr>
