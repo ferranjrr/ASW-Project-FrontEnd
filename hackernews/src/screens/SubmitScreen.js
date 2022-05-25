@@ -49,7 +49,7 @@ function SubmitForm () {
       </div>
       <div>
         <label>Text</label>
-        <input type="text" name="text" {...register('text')} />
+        <textarea type="text" name="text" {...register('text')} />
       </div>
       {errors.neitherURLorText && (
           <p style={{ color: "red" }}>{errors.neitherURLorText.message}</p>
