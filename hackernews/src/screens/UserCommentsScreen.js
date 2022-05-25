@@ -6,14 +6,14 @@ import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
 function UserComments() {
-    const location = useLocation();
+  const location = useLocation();
 	const [data, setData] = useState([]);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [isLoading, setLoading] = useState(true);
 	const yesterday = new Date(Date.now() - 1 * 864e5 - new Date(Date.now() - 1 * 864e5).getTimezoneOffset() * 6e4).toISOString().split('T')[0]
 
 	useEffect(() => {
-	    const queryParams = new URLSearchParams(location.search);
+	  const queryParams = new URLSearchParams(location.search);
 		const username = queryParams.get("username");
 		if (!username) return;
 		if (isLoading) {
