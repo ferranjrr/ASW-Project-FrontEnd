@@ -259,7 +259,7 @@ function User() {
 										<tr>
 											<td></td>
 											<td>
-												<a href={"/user/comments?username=" + user.username}>
+												<a href={"/threads?user=" + user.username}>
 													<u>comments</u>
 												</a>
 											</td>
@@ -317,7 +317,7 @@ function User() {
 									<tr>
 										<td></td>
 										<td>
-											<a href={"/user/comments?username=" + user.username}>
+											<a href={"/threads?user=" + user.username}>
 												<u>comments</u>
 											</a>
 										</td>

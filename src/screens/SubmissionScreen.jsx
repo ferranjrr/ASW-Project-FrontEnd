@@ -142,18 +142,18 @@ function Submission() {
 					<table>
 						<tr>
 							<td valign="top" className="votelinks">
-                                            <a id="up_{{ submission.id }}" href={"/submission?id="+data.id}>
+                                            <a id="up_{{ submission.id }}">
                                                 <button className="votearrow" title="upvote" onClick={ () => upvoteComment(comment.id)}></button>
                                             </a>
                                         </td>
 							<td className="default">
 								<div style={{ marginTop: 2, marginBottom: -20 }}>
 									<span className="comhead">
-										<a href="../" class="hnuser">
+										<a href={"../user?id=" + comment.authorUsername} class="hnuser">
 											{comment.authorUsername}
 										</a>{" "}
 										<span className="age" title={comment.age}>
-											<a href="../">{comment.age}</a>
+											<a href={"/past?date=" + comment.posted_at_date}>{comment.age}</a>
 										</span>
 									</span>
 								</div>
