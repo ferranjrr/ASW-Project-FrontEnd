@@ -170,7 +170,7 @@ function Ask() {
 											/>
 										</a>
 									</td>
-									<td style={{ height: 10 }}>
+									<td style={{ height: 11 }}>
 										<span className="pagetop">
 											<b className="hnname">
 												<a href="../">Hacker News</a>
