@@ -141,7 +141,7 @@ function News() {
 							unvote
 						</a>{" "}
 						| <a href="../">hide</a> |{" "}
-						<a href={"/submission/" + value.id}> {value.comments} comments</a>
+						<a href={"/submission?id=" + value.id}> {value.comments} comments</a>
 					</td>
 				</tr>
 				<tr className="spacer" style={{ height: 20 }}></tr>
