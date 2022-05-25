@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useSearchParams, useLocation, useNavigate } from "react-router-dom";
+import {
+	Link,
+	useSearchParams,
+	useLocation,
+	useNavigate,
+} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
@@ -7,7 +12,7 @@ import logo from "../assets/gif/y18.gif";
 import "../css/news.css";
 
 function Submission() {
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 	const [error, setError] = useState(null);
 	const [isLoading, setLoading] = useState(true);
 	const location = useLocation();
@@ -24,11 +29,11 @@ function Submission() {
 		.split("T")[0];
 
 	const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        clearErrors
-    } = useForm();
+		register,
+		handleSubmit,
+		formState: { errors },
+		clearErrors,
+	} = useForm();
 
 	useEffect(() => {
 		const queryParams = new URLSearchParams(location.search);
@@ -48,19 +53,23 @@ function Submission() {
 	}, []);
 
 	const handleSubmitComment = (data2) => {
-        console.log(data2);
-        axios
-            .post("https://aswprojectdjango.herokuapp.com/api/submission/" + data.id  + "/comment?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56"
-            + "&text=" + data2.text
-            )
-            .then(function(response) {
-                console.log(response);
-                window.location.reload(false);
-            })
-            .catch(function(err) {
-                console.log(err.response);
-        });
-    }
+		console.log(data2);
+		axios
+			.post(
+				"https://aswprojectdjango.herokuapp.com/api/submission/" +
+					data.id +
+					"/comment?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56" +
+					"&text=" +
+					data2.text
+			)
+			.then(function (response) {
+				console.log(response);
+				window.location.reload(false);
+			})
+			.catch(function (err) {
+				console.log(err.response);
+			});
+	};
 
 	function getComments(id) {
 		axios
@@ -108,26 +117,34 @@ function Submission() {
 		return <div className="App"></div>;
 	}
 
-	function upvoteSubmission (submission_id) {
-	    axios
-				.post("https://aswprojectdjango.herokuapp.com/api/submission/" + submission_id + "/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
-				.then((response) => {
-					console.log(response);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
+	function upvoteSubmission(submission_id) {
+		axios
+			.post(
+				"https://aswprojectdjango.herokuapp.com/api/submission/" +
+					submission_id +
+					"/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56"
+			)
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
-	function upvoteComment (comment_id) {
-	    axios
-				.post("https://aswprojectdjango.herokuapp.com/api/comment/" + comment_id + "/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56")
-				.then((response) => {
-					console.log(response);
-				})
-				.catch((err) => {
-					console.log(err);
-				});
+	function upvoteComment(comment_id) {
+		axios
+			.post(
+				"https://aswprojectdjango.herokuapp.com/api/comment/" +
+					comment_id +
+					"/upvote?token=3dc9e4d05afb7904e557ccfc80148ae3ff18ea56"
+			)
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	}
 
 	function Comment({ comment }) {
@@ -142,10 +159,17 @@ function Submission() {
 					<table>
 						<tr>
 							<td valign="top" className="votelinks">
-                                            <a id="up_{{ submission.id }}" href={"/submission?id="+data.id}>
-                                                <button className="votearrow" title="upvote" onClick={ () => upvoteComment(comment.id)}></button>
-                                            </a>
-                                        </td>
+								<a
+									id="up_{{ submission.id }}"
+									href={"/submission?id=" + data.id}
+								>
+									<button
+										className="votearrow"
+										title="upvote"
+										onClick={() => upvoteComment(comment.id)}
+									></button>
+								</a>
+							</td>
 							<td className="default">
 								<div style={{ marginTop: 2, marginBottom: -20 }}>
 									<span className="comhead">
@@ -171,7 +195,16 @@ function Submission() {
 										<p>
 											<font size="1">
 												<u>
-													<a href={"/reply?id=" + comment.id + "&submission_id=" + comment.submission_id}>reply</a>
+													<a
+														href={
+															"/reply?id=" +
+															comment.id +
+															"&submission_id=" +
+															comment.submission_id
+														}
+													>
+														reply
+													</a>
 												</u>
 											</font>
 										</p>
@@ -223,7 +256,6 @@ function Submission() {
 											<b class="hnname">
 												<a href="../">Hacker News</a>
 											</b>
-<<<<<<< HEAD
 											<a href="../newest">new</a>
 											{" | "}
 											<Link
@@ -235,9 +267,6 @@ function Submission() {
 												threads
 											</Link>
 											{" | "}
-=======
-											<a href="../newest">new</a> | <a href="../threads?user=pau">threads</a> |{" "}
->>>>>>> 2e9496ae3c4cc1ff708498542197c271bf2bb02d
 											<a href={"../past?date=" + yesterday}>past</a> |{" "}
 											<a href="../ask">ask</a> | <a href="../submit">submit</a>
 										</span>
@@ -263,12 +292,18 @@ function Submission() {
 											<span class="rank"></span>
 										</td>
 										<td valign="top" className="votelinks">
-                                            <a id="up_{{ submission.id }}" href={"/submission?id="+data.id}>
-                                                <button className="votearrow" title="upvote" onClick={ () => upvoteSubmission(data.id)}></button>
-                                            </a>
-                                        </td>
+											<a
+												id="up_{{ submission.id }}"
+												href={"/submission?id=" + data.id}
+											>
+												<button
+													className="votearrow"
+													title="upvote"
+													onClick={() => upvoteSubmission(data.id)}
+												></button>
+											</a>
+										</td>
 										<td class="title">
-<<<<<<< HEAD
 											<a href="{{ submission.url }}" class="titlelink">
 												{data.title}
 											</a>{" "}
@@ -279,16 +314,6 @@ function Submission() {
 													</a>
 												</span>
 											)}
-=======
-											<a href={"/submission?id=" + data.id} className="titlelink"> {data.title} </a>
-											<span class="sitebit comhead">
-												(
-												<a href={ data.url } target="_blank">
-													<span class="sitestr">{data.url}</span>
-												</a>
-												)
-											</span>
->>>>>>> 2e9496ae3c4cc1ff708498542197c271bf2bb02d
 										</td>
 										<td class="title">
 											<a
@@ -308,15 +333,10 @@ function Submission() {
 												{data.authorUsername}
 											</a>{" "}
 											<span class="age">
-<<<<<<< HEAD
-												<sp href="{% url 'detailedSubmission' submission.id %}">
-=======
-												<a href={"/past?date=" + data.posted_at_date}>
->>>>>>> 2e9496ae3c4cc1ff708498542197c271bf2bb02d
+												<span href="{% url 'detailedSubmission' submission.id %}">
 													{data.age}
-												</sp>
+												</span>
 											</span>{" "}
-<<<<<<< HEAD
 											{" | "}
 											<Link
 												to={{
@@ -324,9 +344,6 @@ function Submission() {
 													search: "?id=" + data.id,
 												}}
 											>
-=======
-											<a href={"/submission?id=" + data.id}>
->>>>>>> 2e9496ae3c4cc1ff708498542197c271bf2bb02d
 												{data.comments} comments
 											</Link>
 										</td>
@@ -339,9 +356,7 @@ function Submission() {
 									<tr>
 										<td colspan="2"></td>
 										<td>
-											<form
-												onSubmit={handleSubmit(handleSubmitComment)}
-											>
+											<form onSubmit={handleSubmit(handleSubmitComment)}>
 												<input
 													type="hidden"
 													name="submission"
@@ -352,7 +367,10 @@ function Submission() {
 													name="parent"
 													value="{{submission.id}}"
 												></input>
-												<textarea name="text" {...register('text', { required: true })} />
+												<textarea
+													name="text"
+													{...register("text", { required: true })}
+												/>
 												<button>submitComment</button>
 											</form>
 										</td>
