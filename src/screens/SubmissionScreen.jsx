@@ -328,7 +328,7 @@ function Submission() {
 											<span class="age">
 												<a href={"/past?date=" + data.posted_at_date}>
 													{data.age}
-												</span>
+												</a>
 											</span>{" "}
 											{" | "}
 											<Link
