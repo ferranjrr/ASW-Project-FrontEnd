@@ -132,7 +132,7 @@ function News() {
 											</b>
 											<a href="../">new</a> | <a href="../">threads</a> |{" "}
 											<a href="../">past</a> | <a href="../">ask</a> |{" "}
-											<a href="../">submit</a>
+											<a href="../submit">submit</a>
 										</span>
 									</td>
 									<td style={{ textAlign: "right", paddingRight: 4 }}>
