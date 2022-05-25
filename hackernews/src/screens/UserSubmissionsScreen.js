@@ -134,8 +134,8 @@ function UserSubmissions() {
 											<b className="hnname">
 												<a href="../">Hacker News</a>
 											</b>
-											<a href="../">new</a> | <a href="../">threads</a> |{" "}
-											<a href="../">past</a> | <a href="../">ask</a> |{" "}
+											<a href="../newest">new</a> | <a href="../">threads</a> |{" "}
+											<a href="../">past</a> | <a href="../ask">ask</a> |{" "}
 											<a href="../submit">submit</a>
 										</span>
 									</td>
