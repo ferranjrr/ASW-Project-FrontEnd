@@ -84,9 +84,14 @@ function News() {
 				</td>
 				{value.type === "url" ? (
 					<td className="title">
-						<a href={"/submission/" + value.id} className="titlelink">
-							{value.title}{" "}
-						</a>
+						<Link
+							to={{
+								pathname: "/submission",
+								search: "?id=" + value.id,
+							}}
+						>
+							{value.title}
+						</Link>
 						<span className="sitebit comhead">
 							(
 							<a href={value.url} target="_blank">
@@ -97,9 +102,14 @@ function News() {
 					</td>
 				) : (
 					<td className="title">
-						<a href={"/submission/" + value.id} className="titlelink">
-							{value.title}{" "}
-						</a>
+						<Link
+							to={{
+								pathname: "/submission",
+								search: "?id=" + value.id,
+							}}
+						>
+							{value.title}
+						</Link>
 					</td>
 				)}
 				<tr>
